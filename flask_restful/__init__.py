@@ -593,6 +593,9 @@ def marshal(data, fields, envelope=None):
             return cls()
         return cls
 
+    if isinstance(data, ResponseBase):
+        return data
+
     if isinstance(data, (list, tuple)):
         return (OrderedDict([(envelope, [marshal(d, fields) for d in data])])
                 if envelope else [marshal(d, fields) for d in data])
